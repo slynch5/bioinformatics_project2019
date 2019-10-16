@@ -5,16 +5,21 @@
 
 # Usage: bash Project.sh
 
+echo 1 > hsp70align.fasta
+cat hsp70align.fasta| tail -n +2 > hsp70align.fasta
+
+echo 1 > mcrAalign.fasta
+cat mcrAalign.fasta| tail -n +2 > mcrAalign.fasta
+
 for x in "./ref_sequences/hsp*.fasta"
 do
-
         cat $x >> hsp70align.fasta
 
 done
 
 for y in "./ref_sequences/mcrA*.fasta"
 do
-	
+
 	cat $y >> mcrAalign.fasta
 done
 
