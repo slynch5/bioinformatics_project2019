@@ -30,23 +30,23 @@ done
 # The cocatenated files for the hsp70 and mcrA gene are sent to the MUSCLE tool for alignment.
 # The output files are in .fasta format.
 
-./muscle3.8.31_i86linux64 -in ./ref_sequences/hsp70align.fasta -out hsp70muscle.fasta
+./muscle -in ./ref_sequences/hsp70align.fasta -out hsp70muscle.fasta
 
-./muscle3.8.31_i86linux64 -in ./ref_sequences/mcrAalign.fasta -out mcrAmuscle.fasta
+./muscle -in ./ref_sequences/mcrAalign.fasta -out mcrAmuscle.fasta
 
 # The MUSCLE alignments are sent to the HMMBUILD tool.This will create a hidden Markov model or
 # a "fuzzy picture" of what the gene looks like.  The .hmm files outputed will be sent to
 # the HMMSEARCH tool.
 
-~/Private/bioinformatics_project2019/hmmer-3.2/hmmbuild hsp70.hmm hsp70muscle.fasta
+./hmmer/hmmbuild hsp70.hmm hsp70muscle.fasta
 
-~/Private/bioinformatics_project2019/hmmer-3.2/hmmbuild mcrA.hmm mcrAmuscle.fasta 
+./hmmer/hmmbuild mcrA.hmm mcrAmuscle.fasta 
 
 # The following loop will compare each of the 50 proteome seqeuences to the hsp70 and mcrA gene 
 # alignments using the HMMSEARCH tool. Directs the output to the designated file. 
 
 for k in ./proteomes/proteome_*
 do
-	./hmmer-3.2/hmmsearch hsp70.hmm $k > hsp70.out 
-	./hmmer-3.2/hmmsearch mcrA.hmm $k > mcrA.out
+	./hmmer/hmmsearch hsp70.hmm $k > hsp70.out 
+	./hmmer/hmmsearch mcrA.hmm $k > mcrA.out
 done
