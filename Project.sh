@@ -45,8 +45,26 @@ done
 # The following loop will compare each of the 50 proteome seqeuences to the hsp70 and mcrA gene 
 # alignments using the HMMSEARCH tool. Directs the output to the designated file. 
 
+echo Proteome	hspHits	mcrAhits >> results.csv
+
+num=$(0)
+
 for k in ./proteomes/proteome_*
 do
-	./hmmer/hmmsearch hsp70.hmm $k > hsp70.out 
-	./hmmer/hmmsearch mcrA.hmm $k > mcrA.out
+
+	num=$(($num + 1))
+	
+	proteome=$(echo proteome_$num)
+
+	./hmmer/hmmsearch --tblout hsp70.out hsp70.hmm $k
+	
+	hsp=$(cat hsp70.out | grep -v "^#" | uniq | wc -l)
+	 
+	./hmmer/hmmsearch --tblout mcrA.out mcrA.hmm $k
+	
+	mcrA=$(cat mcrA.out | grep -v "^#" | uniq | wc -l)
+
+	echo $proteome	$hsp	$mcrA >> results.csv
+
 done
+
