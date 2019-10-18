@@ -75,16 +75,16 @@ do
 
 done
 
-# This pipe  will search through the rows of the results.csv for the top 3 candidates for 
+# This pipe  will search through the rows of the results.csv for the top 4 candidates for 
 # pH-resistant methanogens based on the results of the hsp70 and mcrA gene hits. Any proteomes
 # that did not match the mcrA gene at least once, and therefore are not methanogens, were eliminated.
-# Of the proteomes remaining, the 3 that had the most hsp70 gene matches were chosen.
+# Of the proteomes remaining, the 4 that had the most hsp70 gene matches were chosen.
 
 cat results.csv | tail -n +2 | awk -F ' ' '$3>=1'|sort -k2 -n| tail -n 4 | cut -d " " -f 1 > Candidates.txt
 
 
 ## Description of the files outputed in this script:
-	# Candidates.txt --> contains top 3 pH-resistant methanogens
+	# Candidates.txt --> contains top 4 pH-resistant methanogens
 	# hsp70align.fasta --> cocatenated hsp70 reference gene sequences
 	# hsp70.hmm --> output from HMMBUILD hsp gene
 	# hsp70muscle.fasta --> output from MUSCLE alignment for hsp gene
