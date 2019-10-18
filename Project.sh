@@ -80,7 +80,7 @@ done
 # that did not match the mcrA gene at least once, and therefore are not methanogens, were eliminated.
 # Of the proteomes remaining, the 3 that had the most hsp70 gene matches were chosen.
 
-cat results.csv | tail -n +2 | awk -F ' ' '$3>=1'|sort -k2 -n| tail -n 3 | cut -d " " -f 1 > Candidates.txt
+cat results.csv | tail -n +2 | awk -F ' ' '$3>=1'|sort -k2 -n| tail -n 4 | cut -d " " -f 1 > Candidates.txt
 
 
 ## Description of the files outputed in this script:

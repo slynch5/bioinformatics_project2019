@@ -10,5 +10,5 @@ WP_048120720.1       -          mcrAmuscle           -                  0 1117.1
 # Target file:     ./proteomes/proteome_50.fasta
 # Option settings: ./hmmer/hmmsearch --tblout mcrA.out mcrA.hmm ./proteomes/proteome_50.fasta 
 # Current dir:     /afs/crc.nd.edu/user/s/slynch5/Private/bioinformatics_project2019
-# Date:            Thu Oct 17 22:45:06 2019
+# Date:            Thu Oct 17 22:59:48 2019
 # [ok]

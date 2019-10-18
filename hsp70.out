@@ -12,5 +12,5 @@ WP_048116752.1       -          hsp70muscle          -             9e-107  355.4
 # Target file:     ./proteomes/proteome_50.fasta
 # Option settings: ./hmmer/hmmsearch --tblout hsp70.out hsp70.hmm ./proteomes/proteome_50.fasta 
 # Current dir:     /afs/crc.nd.edu/user/s/slynch5/Private/bioinformatics_project2019
-# Date:            Thu Oct 17 22:45:06 2019
+# Date:            Thu Oct 17 22:59:48 2019
 # [ok]
