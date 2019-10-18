@@ -1,6 +1,10 @@
-# Bioinformatics_project2019 Shell Script. 
+## Bioinformatics_project2019 Shell Script. 
 
-# Usage: bash Project.sh
+## Usage: bash Project.sh
+
+# The user's file system should be organized as follows in order to run this script:
+#	bioinformatics_project2019 --> proteomes/, ref_sequences/, Project.sh, hmmer, muscle
+#	hmmer --> hmmerbuild, hmmsearch
 
 # The following commands clear the contents of the alignment files created. This allows the user 
 # to bash the shell script multiple times in case they need to edit it. 
@@ -45,9 +49,12 @@ done
 # The following loop will compare each of the 50 proteome seqeuences to the hsp70 and mcrA gene 
 # alignments using the HMMSEARCH tool. Directs the output to the designated file. 
 
-echo Proteome	hspHits	mcrAhits >> results.csv
-
 num=$(0)
+
+echo 1 > results.csv
+cat results.csv| tail -n +2 > results.csv # Clears the results file for new compiling
+
+echo Proteome   hspHits mcrAhits >> results.csv # Header for results.csv
 
 for k in ./proteomes/proteome_*
 do
@@ -67,4 +74,25 @@ do
 	echo $proteome	$hsp	$mcrA >> results.csv
 
 done
+
+# This pipe  will search through the rows of the results.csv for the top 3 candidates for 
+# pH-resistant methanogens based on the results of the hsp70 and mcrA gene hits. Any proteomes
+# that did not match the mcrA gene at least once, and therefore are not methanogens, were eliminated.
+# Of the proteomes remaining, the 3 that had the most hsp70 gene matches were chosen.
+
+cat results.csv | tail -n +2 | awk -F ' ' '$3>=1'|sort -k2 -n| tail -n 3 | cut -d " " -f 1 > Candidates.txt
+
+
+## Description of the files outputed in this script:
+	# Candidates.txt --> contains top 3 pH-resistant methanogens
+	# hsp70align.fasta --> cocatenated hsp70 reference gene sequences
+	# hsp70.hmm --> output from HMMBUILD hsp gene
+	# hsp70muscle.fasta --> output from MUSCLE alignment for hsp gene
+	# hsp70.out --> table output from HMMSEARCH for hsp gene
+	# mcrAalign.fasta --> cocatenated mcrA reference gene sequences
+	# mcrA.hmm --> output from HMMBUILD for mcrA gene
+	# mcrAmuscle.fasta --> output from MUSCLE alignment for mcrA gene
+	# mcrA.out --> table output from HMMSEARCH for mcrA gene
+	# Project.sh --> shel script
+	# results.csv --> table of the gene search results for each proteome
 
